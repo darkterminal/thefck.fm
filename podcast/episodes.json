@@ -1,0 +1,53 @@
+[
+  {
+    "id": "ep-003",
+    "episode": 3,
+    "title": "Listening to a Kitchen",
+    "description": "A short field recording from a busy kitchen, and what it taught me about attention.",
+    "date": "2026-10-05",
+    "duration": "0:42",
+    "audio": "audio/episode-003.mp3",
+    "cover": "podcast/covers/episode-003.svg",
+    "tags": ["audio", "journal"],
+    "showNotes": "podcast/episodes/ep-003.md",
+    "author": "Your Name",
+    "explicit": false,
+    "season": 1,
+    "episodeType": "full",
+    "published": true
+  },
+  {
+    "id": "ep-002",
+    "episode": 2,
+    "title": "Boring Websites, Part One",
+    "description": "Talking through the reasons I moved my site to plain files, and what I would change.",
+    "date": "2026-09-21",
+    "duration": "0:36",
+    "audio": "audio/episode-002.mp3",
+    "cover": "podcast/covers/episode-002.svg",
+    "tags": ["technology", "web"],
+    "showNotes": "podcast/episodes/ep-002.md",
+    "author": "Your Name",
+    "explicit": false,
+    "season": 1,
+    "episodeType": "full",
+    "published": true
+  },
+  {
+    "id": "ep-001",
+    "episode": 1,
+    "title": "Why I Started Recording",
+    "description": "An introduction to the podcast: what it is for, how it is made and what to expect.",
+    "date": "2026-09-07",
+    "duration": "0:30",
+    "audio": "audio/episode-001.mp3",
+    "cover": "podcast/covers/episode-001.svg",
+    "tags": ["journal", "technology"],
+    "showNotes": "podcast/episodes/ep-001.md",
+    "author": "Your Name",
+    "explicit": false,
+    "season": 1,
+    "episodeType": "trailer",
+    "published": true
+  }
+]

@@ -1,0 +1,28 @@
+<header class="site-header" data-chrome>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="wrap">
+    <div class="flex items-stretch justify-between">
+      <a class="site-name" href="index.html" data-site-name>YOUR NAME</a>
+      <div class="flex items-stretch">
+        <nav aria-label="Primary" class="hidden md:flex">
+          <a class="nav-link" href="blog.html" data-nav="blog">Blog</a>
+          <a class="nav-link" href="podcast.html" data-nav="podcast">Podcast</a>
+          <a class="nav-link" href="about.html" data-nav="about">About</a>
+        </nav>
+        <button type="button" class="theme-btn" data-theme-toggle aria-label="Dark theme" aria-pressed="false">
+          <span class="when-light"><i data-lucide="moon" aria-hidden="true">☾</i></span>
+          <span class="when-dark"><i data-lucide="sun" aria-hidden="true">☀</i></span>
+        </button>
+        <button type="button" class="theme-btn md:hidden" data-menu-button aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <span data-state="a"><i data-lucide="menu" aria-hidden="true">☰</i></span>
+          <span data-state="b" hidden><i data-lucide="x" aria-hidden="true">×</i></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="md:hidden" aria-label="Mobile" hidden>
+    <a class="mobile-link" href="blog.html" data-nav="blog">Blog</a>
+    <a class="mobile-link" href="podcast.html" data-nav="podcast">Podcast</a>
+    <a class="mobile-link" href="about.html" data-nav="about">About</a>
+  </nav>
+</header>

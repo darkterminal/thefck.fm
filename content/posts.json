@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "notes-on-plain-text",
+    "title": "Notes on Plain Text",
+    "description": "Why I keep almost everything I write in files that any editor can open.",
+    "date": "2026-10-05",
+    "author": "Your Name",
+    "tags": ["writing", "technology"],
+    "file": "content/posts/notes-on-plain-text.md",
+    "published": true
+  },
+  {
+    "slug": "the-case-for-boring-websites",
+    "title": "The Case for Boring Websites",
+    "description": "A page that loads in a blink, reads well and still works in ten years is not a small ambition.",
+    "date": "2026-09-21",
+    "author": "Your Name",
+    "tags": ["technology", "web"],
+    "file": "content/posts/the-case-for-boring-websites.md",
+    "published": true
+  },
+  {
+    "slug": "a-quiet-week",
+    "title": "A Quiet Week",
+    "description": "Field notes from seven days with no meetings, a borrowed recorder and a lot of walking.",
+    "date": "2026-09-07",
+    "author": "Your Name",
+    "tags": ["journal", "audio"],
+    "file": "content/posts/a-quiet-week.md",
+    "published": true
+  }
+]

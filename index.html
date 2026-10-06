@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YOUR NAME — Personal Blog & Audio Journal</title>
+  <meta name="description" content="Thoughts, notes, stories, and things worth listening to.">
+  <meta property="og:title" content="YOUR NAME — Personal Blog & Audio Journal">
+  <meta property="og:description" content="Thoughts, notes, stories, and things worth listening to.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta name="htmx-config" content='{"allowEval":false,"allowScriptTags":false,"selfRequestsOnly":true,"includeIndicatorStyles":false}'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
+</head>
+<body data-page="home" data-nav="">
+  <div class="partial-placeholder site-header" hx-get="partials/header.html" hx-trigger="load" hx-swap="outerHTML"></div>
+  <main id="main" tabindex="-1">
+    <section class="wrap pt-12 pb-16 md:pt-20 md:pb-24">
+      <h1 class="display">
+        <span class="block">Personal blog</span>
+        <span class="block">&amp; audio journal</span>
+      </h1>
+      <p class="lede mt-8">Thoughts, notes, stories,<br>and things worth listening to.</p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a class="btn btn-solid" href="blog.html">Read blog</a>
+        <a class="btn" href="podcast.html">Listen to the podcast</a>
+      </div>
+    </section>
+
+    <section class="wrap pb-16" aria-labelledby="latest-posts-title">
+      <div class="section-head mb-0">
+        <h2 id="latest-posts-title" class="h-section">Latest posts</h2>
+        <a class="link meta" href="blog.html">All posts</a>
+      </div>
+      <div id="latest-posts"></div>
+    </section>
+
+    <section class="wrap pb-8" aria-labelledby="latest-episodes-title">
+      <div class="section-head mb-0">
+        <h2 id="latest-episodes-title" class="h-section">Latest episodes</h2>
+        <a class="link meta" href="podcast.html">All episodes</a>
+      </div>
+      <div id="latest-episodes"></div>
+    </section>
+  </main>
+  <div hx-get="partials/footer.html" hx-trigger="load" hx-swap="outerHTML"></div>
+  <noscript><p class="wrap py-8">This site needs JavaScript to load its content.</p></noscript>
+</body>
+</html>
