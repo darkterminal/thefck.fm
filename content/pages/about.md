@@ -1,7 +1,7 @@
 ---
 title: "About"
 description: "A little about Imam Ali Mustofa, Software Freestyle Engineer, and the philosophy behind this corner of the internet."
-----
+---
 
 Hi, I'm **Imam Ali Mustofa**, also known as **darkterminal** — a Software Freestyle Engineer who enjoys breaking things, rebuilding them from first principles, and occasionally shipping things nobody asked for.
 
