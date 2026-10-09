@@ -1,32 +1,22 @@
 [
   {
-    "slug": "notes-on-plain-text",
-    "title": "Notes on Plain Text",
-    "description": "Why I keep almost everything I write in files that any editor can open.",
-    "date": "2026-10-05",
-    "author": "Your Name",
-    "tags": ["writing", "technology"],
-    "file": "content/posts/notes-on-plain-text.md",
+    "slug": "bs-bg1-anatomi-krisis-kognitif-—-dekonstruksi-ortodoksi-agile-dogma-clean-code-dan-alienasi-model-mental-insinyur",
+    "title": "BS-BG1: Anatomi Krisis Kognitif — Dekonstruksi Ortodoksi Agile, Dogma Clean Code, dan Alienasi Model Mental Insinyur",
+    "description": "Sorotan pada dekadensi model mental insinyur perangkat lunak di bawah hegemoni industri saat ini, sekaligus meletakkan batu pijakan pertama menuju paradigma *Character-Driven Development* dan *Software Freestyle Engineering*",
+    "date": "2026-10-09",
+    "author": "Imam Ali Mustofa",
+    "tags": ["journal", "writing", "technology"],
+    "file": "content/posts/bs-bg1-anatomi-krisis-kognitif-—-dekonstruksi-ortodoksi-agile-dogma-clean-code-dan-alienasi-model-mental-insinyur.md",
     "published": true
   },
   {
-    "slug": "the-case-for-boring-websites",
-    "title": "The Case for Boring Websites",
-    "description": "A page that loads in a blink, reads well and still works in ten years is not a small ambition.",
-    "date": "2026-09-21",
-    "author": "Your Name",
-    "tags": ["technology", "web"],
-    "file": "content/posts/the-case-for-boring-websites.md",
-    "published": true
-  },
-  {
-    "slug": "a-quiet-week",
-    "title": "A Quiet Week",
-    "description": "Field notes from seven days with no meetings, a borrowed recorder and a lot of walking.",
-    "date": "2026-09-07",
-    "author": "Your Name",
-    "tags": ["journal", "audio"],
-    "file": "content/posts/a-quiet-week.md",
+    "slug": "bs-bg2-bahasa-pemrograman-sebagai-sastra-postmodern-and-protokol-komunikasi-dua-kanal-dual-channel",
+    "title": "BS-BG2: Bahasa Pemrograman sebagai Sastra Postmodern & Protokol Komunikasi Dua Kanal (*Dual-Channel*)",
+    "description": "Membedah bagaimana model mental seorang insinyur ditransformasikan: dari sekadar pembuat instruksi mesin menjadi penggubah teks sastra dan perancang komunikasi dua arah.",
+    "date": "2026-10-08",
+    "author": "Imam Ali Mustofa",
+    "tags": ["journal", "writing", "technology"],
+    "file": "content/posts/bs-bg2-bahasa-pemrograman-sebagai-sastra-postmodern-and-protokol-komunikasi-dua-kanal-dual-channel.md",
     "published": true
   }
 ]
