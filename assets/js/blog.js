@@ -235,6 +235,7 @@ export async function initAbout() {
       setMeta({ title: data.title || "About", description: data.description });
       mount(root,
         el("h1", { class: "h-page mb-12" }, data.title || "About"),
+        data.description && el("p", { class: "lede" }, data.description),
         el("div", { class: "prose" }, content));
     } catch (error) {
       if (!error?.kind) console.error(error);
