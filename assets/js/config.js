@@ -6,8 +6,8 @@
  */
 export const SITE_CONFIG = Object.freeze({
   // --- Repository ---------------------------------------------------------
-  owner: "USERNAME",
-  repository: "REPOSITORY",
+  owner: "darkterminal",
+  repository: "thefck.fm",
   branch: "main",
 
   /**
@@ -21,7 +21,7 @@ export const SITE_CONFIG = Object.freeze({
   source: "auto",
 
   // --- Site ---------------------------------------------------------------
-  siteName: "YOUR NAME",
+  siteName: ".DARKTERMINAL",
   siteDescription: "Personal blog and audio journal.",
 
   /**
