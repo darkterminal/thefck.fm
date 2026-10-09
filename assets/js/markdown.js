@@ -2,13 +2,15 @@
  * markdown.js — frontmatter parsing, reading time and safe Markdown rendering.
  *
  * `marked` (parser) and `DOMPurify` (sanitizer) are loaded from jsDelivr only
- * when a page actually renders Markdown. Output is ALWAYS sanitized before it
+ * when a page actually renders Markdown. `mermaid` is loaded only when the
+ * Markdown contains a ```mermaid code block. Output is ALWAYS sanitized before it
  * touches the DOM; raw Markdown/HTML is never assigned to innerHTML.
  */
 import { buildAssetUrl } from "./github.js";
 
 const MARKED_URL = "https://cdn.jsdelivr.net/npm/marked@12.0.2/+esm";
 const PURIFY_URL = "https://cdn.jsdelivr.net/npm/dompurify@3.1.7/+esm";
+const MERMAID_URL = "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
 
 let libraries;
 function loadLibraries() {
@@ -126,6 +128,118 @@ function postProcess(fragment, { baseFile, title }) {
   return fragment;
 }
 
+/* ---------------------------------------------------------------- mermaid */
+
+let mermaidPromise;
+function loadMermaid() {
+  mermaidPromise ??= import(MERMAID_URL)
+    .then((m) => m.default ?? m)
+    .catch((error) => {
+      mermaidPromise = undefined; // allow retry
+      throw error;
+    });
+  return mermaidPromise;
+}
+
+/** Monochrome diagram theme built from the site's CSS variables (light/dark aware). */
+function mermaidConfig() {
+  const css = getComputedStyle(document.documentElement);
+  const v = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+  const bg = v("--bg", "#fff");
+  const fg = v("--fg", "#000");
+  const soft = v("--soft", "#f0f0f0");
+  return {
+    startOnLoad: false,
+    securityLevel: "strict", // mermaid sanitizes labels and disables click handlers
+    theme: "base",
+    htmlLabels: false, // plain SVG <text> labels: nothing HTML-in-SVG for the sanitizer to strip
+    flowchart: { htmlLabels: false },
+    fontFamily: v("--font-sans", "Arial, sans-serif"),
+    themeVariables: {
+      background: bg, primaryColor: bg, primaryTextColor: fg, primaryBorderColor: fg,
+      secondaryColor: soft, tertiaryColor: soft, lineColor: fg, textColor: fg,
+      mainBkg: bg, nodeBorder: fg, clusterBkg: soft, clusterBorder: fg,
+      edgeLabelBackground: bg, noteBkgColor: soft, noteTextColor: fg, noteBorderColor: fg,
+    },
+  };
+}
+
+let diagramCounter = 0;
+
+/** Render one diagram into `host`. The SVG is sanitized again before insertion. */
+async function drawDiagram(host, mermaid, purify) {
+  const source = host.dataset.mermaidSource;
+  try {
+    mermaid.initialize(mermaidConfig());
+    const { svg } = await mermaid.render(`mermaid-${diagramCounter++}`, source);
+    const clean = purify.sanitize(svg, {
+      USE_PROFILES: { svg: true, svgFilters: true, html: true },
+      // mermaid ships its (id-scoped) stylesheet inside the SVG, so <style> must survive here
+      ADD_TAGS: ["style"],
+      FORBID_TAGS: ["script"],
+      FORBID_ATTR: ["onclick", "onload", "onerror"],
+    });
+    const template = document.createElement("template");
+    template.innerHTML = clean; // sanitized above
+    host.replaceChildren(template.content);
+    host.classList.remove("is-error");
+  } catch (error) {
+    console.warn("Mermaid diagram could not be rendered:", error);
+    host.classList.add("is-error");
+    const note = document.createElement("p");
+    note.className = "meta";
+    note.textContent = "Diagram could not be rendered.";
+    const pre = document.createElement("pre");
+    pre.tabIndex = 0;
+    pre.textContent = source;
+    host.replaceChildren(note, pre);
+  }
+}
+
+/** Re-draw diagrams when the visitor switches between light and dark theme. */
+let themeObserver;
+function watchTheme(mermaid, purify) {
+  if (themeObserver) return;
+  themeObserver = new MutationObserver(() => {
+    document.querySelectorAll("[data-mermaid-source]").forEach((host) => drawDiagram(host, mermaid, purify));
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+}
+
+/** Replace ```mermaid code blocks with diagram containers (no-op when there are none). */
+async function renderDiagrams(fragment, purify) {
+  const blocks = [...fragment.querySelectorAll("pre > code.language-mermaid")];
+  if (!blocks.length) return;
+
+  const hosts = blocks.map((code) => {
+    const host = document.createElement("div");
+    host.className = "mermaid-diagram";
+    host.tabIndex = 0;
+    host.setAttribute("role", "img");
+    host.setAttribute("aria-label", "Diagram");
+    host.dataset.mermaidSource = code.textContent;
+    host.textContent = "Loading diagram...";
+    code.parentElement.replaceWith(host);
+    return host;
+  });
+
+  let mermaid;
+  try {
+    mermaid = await loadMermaid();
+  } catch {
+    // Library unavailable: show each diagram's source instead of failing the page.
+    hosts.forEach((host) => {
+      host.classList.add("is-error");
+      const pre = document.createElement("pre");
+      pre.textContent = host.dataset.mermaidSource;
+      host.replaceChildren(pre);
+    });
+    return;
+  }
+  for (const host of hosts) await drawDiagram(host, mermaid, purify);
+  watchTheme(mermaid, purify);
+}
+
 /**
  * @param {string} markdown  Markdown body (frontmatter already removed)
  * @param {{baseFile?: string, title?: string}} options
@@ -141,5 +255,7 @@ export async function renderMarkdown(markdown, options = {}) {
   });
   const template = document.createElement("template");
   template.innerHTML = clean; // sanitized above
-  return postProcess(template.content, options);
+  const fragment = postProcess(template.content, options);
+  await renderDiagrams(fragment, purify);
+  return fragment;
 }
